@@ -1,0 +1,36 @@
+.container {
+    max-width: 100% !important;
+    height: 100%;
+    background-size: cover;
+    background-image: url("~@/assets/images/login-bg.jpg");
+}
+
+.wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    border-radius: 12px;
+    width: 400px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    backdrop-filter: blur(20px);
+}
+
+.btn-login {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    background-color: #4ba3e3;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #fff;
+    &:active {
+        background-color: #2d679c;
+    }
+}
