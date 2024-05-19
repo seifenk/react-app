@@ -3,23 +3,43 @@ import Layout from "@/layout/index";
 import Login from "@/pages/Login/Login";
 import Student from "@/pages/Student/Student";
 import Index from "@/pages/Index/Index";
+import Profile from "@/pages/Profile/index";
+import Page404 from "@/pages/404/404";
+import Map from "@/pages/Map/Index";
 
-export const menu: any = [
+export const menu = [
     {
-        path: "/index",
+        path: "index",
         label: "看板",
         element: <Index />,
     },
     {
-        path: "/stuList",
+        path: "stuList",
         label: "学生列表",
         element: <Student />,
     },
+    {
+        path: "profile",
+        label: "个人信息",
+        element: <Profile />,
+    },
+    {
+        path: "map",
+        label: "地图",
+        element: <Map />,
+    },
 ];
 
-const router = createBrowserRouter([
-    { path: "/", element: <Layout />, children: menu },
+export const routes = [
+    {
+        path: "/",
+        element: <Layout />,
+        children: menu,
+    },
     { path: "/login", element: <Login /> },
-]);
+    { path: "/*", element: <Page404 /> },
+];
+
+const router = createBrowserRouter(routes);
 
 export default router;

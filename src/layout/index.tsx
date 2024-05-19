@@ -1,44 +1,39 @@
-import React, { useState } from "react";
-import { MenuFoldOutlined, MenuUnfoldOutlined, AppstoreOutlined } from "@ant-design/icons";
-import { Layout, Menu, Button, theme } from "antd";
+import React, { useState, useEffect } from "react";
+import { MenuFoldOutlined, MenuUnfoldOutlined, AppstoreOutlined, UserOutlined } from "@ant-design/icons";
+import { Layout, Menu, Button, theme, Dropdown, Avatar } from "antd";
 import { Outlet } from "react-router-dom";
 import { menu } from "@/router/index";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setInfo } from "@/store/module/user";
+import { formatRoutesToMenu } from "@/utils/index";
 const { Header, Sider, Content } = Layout;
-
-const formatMenu = (routeList: any[], prefix?: string) => {
-    const arr: any = [];
-    routeList.forEach(item => {
-        const obj: any = {
-            key: item.path,
-            label: item.label,
-            icon: <AppstoreOutlined />,
-        };
-
-        if (item.children) {
-            obj.children = formatMenu(item.children);
-            arr.push(obj);
-        } else {
-            arr.push(obj);
-        }
-    });
-
-    return arr;
-};
 
 const ProLayout: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const userInfo = useSelector((state: any) => state.user.userInfo);
 
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
-    const items = formatMenu(menu);
+    const items = formatRoutesToMenu(menu, "");
 
     const onSelect = ({ key }: { key: any }) => {
         navigate(key);
     };
+
+    const dropdownList = [
+        {
+            key: "1",
+            label: <span>个人中心</span>,
+        },
+        {
+            key: "2",
+            label: <span>退出登录</span>,
+        },
+    ];
 
     return (
         <Layout style={{ height: "100%" }}>
@@ -46,8 +41,8 @@ const ProLayout: React.FC = () => {
                 <div className="demo-logo-vertical" />
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={[location.pathname]} items={items} onSelect={onSelect} />
             </Sider>
-            <Layout>
-                <Header style={{ padding: 0, background: colorBgContainer, position: "sticky" }}>
+            <Layout style={{ overflow: "auto" }}>
+                <Header className="flex justify-between" style={{ padding: 0, background: colorBgContainer, position: "sticky", top: 0, zIndex: 1 }}>
                     <Button
                         type="text"
                         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -58,12 +53,18 @@ const ProLayout: React.FC = () => {
                             height: 64,
                         }}
                     />
+
+                    <div className="mr-[40px]">
+                        <Dropdown menu={{ items: dropdownList }} placement="bottom" arrow>
+                            {userInfo.avatar ? <Avatar size="large" src={process.env.REACT_APP_FILE_URL + userInfo.avatar} /> : <Avatar size="large" icon={<UserOutlined />} />}
+                        </Dropdown>
+                    </div>
                 </Header>
                 <Content
                     style={{
-                        margin: "24px 16px",
-                        padding: 24,
-                        minHeight: 280,
+                        margin: "20px",
+                        padding: 20,
+                        minHeight: "auto",
                         background: colorBgContainer,
                         borderRadius: borderRadiusLG,
                     }}>

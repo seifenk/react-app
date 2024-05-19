@@ -20,8 +20,14 @@ module.exports = {
             "@": path.resolve(__dirname, "src"),
         },
 
-        client: {
-            overlay: false,
-        },
+        // module: {
+        //     rules: [
+        //         {
+        //             test: /\.worker\.(js|jsx|ts|tsx)$/,
+        //             exclude: /node_modules/,
+        //             use: ["worker-loader", "ts-loader"],
+        //         },
+        //     ],
+        // },
     },
 };
