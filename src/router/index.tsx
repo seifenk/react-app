@@ -6,11 +6,17 @@ import Index from "@/pages/Index/Index";
 import Profile from "@/pages/Profile/index";
 import Page404 from "@/pages/404/404";
 import Map from "@/pages/Map/Index";
+import EchartsIns from "@/pages/EchartsIns/index";
 
 export const menu = [
     {
-        path: "index",
+        path: "charts",
         label: "看板",
+        element: <EchartsIns />,
+    },
+    {
+        path: "comp",
+        label: "组件",
         element: <Index />,
     },
     {

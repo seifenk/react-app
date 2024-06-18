@@ -1,4 +1,5 @@
 import { AppstoreOutlined } from "@ant-design/icons";
+import { log } from "console";
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import myWorker from "worker-loader!@/workers/file.worker.js";
 export const formatRoutesToMenu = (routeList: any[], prefix?: string) => {
@@ -79,3 +80,17 @@ export const concurRequest = (urls: any[], maxNum: number = 3) => {
         }
     });
 };
+
+export function singleton<T extends object>(className, tip: string): T {
+    let ins: T;
+    return new Proxy(className, {
+        construct(target, args) {
+            if (!ins) {
+                ins = new target(...args);
+            } else {
+                console.warn(tip);
+            }
+            return ins;
+        },
+    });
+}

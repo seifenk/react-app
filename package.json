@@ -16,6 +16,7 @@
         "axios": "^1.6.8",
         "cesium": "^1.116.0",
         "crypto-js": "^4.2.0",
+        "echarts": "^5.5.0",
         "js-cookie": "^3.0.5",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
