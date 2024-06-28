@@ -2,7 +2,7 @@ import UploadChunk from "@/components/UploadChunk";
 
 const Index = () => {
     return (
-        <div className="shadow-lg shadow-blue-500/50 p-[10px] mt-[10px] ">
+        <div className="p-[10px] mt-[10px] w-fit">
             <UploadChunk />
         </div>
     );
