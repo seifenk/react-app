@@ -5,7 +5,7 @@ import { singleton } from "./index";
 class PdMap {
     public map!: Cesium.Viewer;
     public divId: string;
-    constructor(divId) {
+    constructor(divId: string) {
         this.divId = divId;
         this.init();
     }
@@ -27,10 +27,23 @@ class PdMap {
         this.map.camera.flyTo({
             destination: Cesium.Cartesian3.fromDegrees(106.58897191286087, 29.560364659397038, 400),
         });
-        console.log("地图示例已创建");
+    }
+    destroy() {
+        this.map.destroy();
     }
 }
 
 const singleMap = singleton<typeof PdMap>(PdMap, "地图在已在单例模式运行，请勿重复创建");
 
-export { singleMap as PdMap };
+let _Map: PdMap;
+
+const initMap = () => {
+    _Map = new PdMap("mapContainer");
+};
+
+const destroyMap = () => {
+    _Map.destroy();
+    _Map = null as unknown as PdMap;
+};
+
+export { initMap, destroyMap };

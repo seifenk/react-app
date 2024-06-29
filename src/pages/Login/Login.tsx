@@ -1,4 +1,5 @@
-import "./style.scss";
+import styles from "./index.module.scss";
+import { css, styled } from "styled-components";
 import { Button, Checkbox, Form, type FormProps, Input } from "antd";
 import { postLogin, postAddUser } from "@/api";
 import { useNavigate } from "react-router-dom";
@@ -26,9 +27,9 @@ const Login = () => {
     };
 
     return (
-        <div className="container">
-            <div className="wrapper">
-                <div className="login-card">
+        <div className={styles.container}>
+            <div className={styles.wrapper}>
+                <div className={styles["login-card"]}>
                     <h1 className="text-center">随便练练</h1>
                     <Form name="basic" form={form} labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} style={{ maxWidth: 600 }} initialValues={{ remember: true }} autoComplete="off">
                         <Form.Item<FieldType> label="用户名" name="username" rules={[{ required: true, message: "请输入用户名" }]}>
@@ -47,7 +48,7 @@ const Login = () => {
                             <Button type="primary" onClick={login}>
                                 登录
                             </Button>
-                            <Button type="primary" htmlType="button" onClick={register}>
+                            <Button type="primary" htmlType="button" ghost onClick={register}>
                                 注册
                             </Button>
                         </Form.Item>
